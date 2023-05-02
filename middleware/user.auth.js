@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const auth = (req, res, next) => {
     let token = req.headers.authorization;
     // req.body.authorID = 1
-    // console.log(req.body)
+    console.log(req.body)
     try {
         let decoded = jwt.verify(token.split(" ")[1], 'masai');
         if (decoded) {

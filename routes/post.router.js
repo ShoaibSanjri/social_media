@@ -10,7 +10,7 @@ postRouter.post('/create', async (req, res) => {
     try {
         let post = new PostModel(req.body);
         await post.save();
-        res.status(200).send({"msg":"New Post is added"})
+        res.status(200).send({"msg":"New Post is added","post":post})
     }
     catch (err) {
         res.status(400).send(err)
