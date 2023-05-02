@@ -25,7 +25,7 @@ postRouter.get('/', async (req, res) => {
         
             try {
         
-                let post = await PostModel.find({authorID:authorID,device:req.query.device});
+                let post = await PostModel.find({ device: req.query.device });
                 res.status(200).send({"msg":post})
             
             
