@@ -30,8 +30,16 @@ userRouter.post('/login', async (req, res) => {
     try {
         let user = await UserModel.findOne({email:email});
         if (user) {
-            var token = jwt.sign({ authorID: password }, 'masai');
-            res.status(200).send({'msg':"Login success","token":token})
+            bcrypt.compare(password, user.password, (err, result) => {
+                if (result) {
+                    var token = jwt.sign({ authorID: password }, 'masai');
+                    res.status(200).send({'msg':"Login success","token":token})
+                }
+                else if(err) {
+                    res.status(400).send({'msg':err})
+                }
+            });
+            
         }
         else {
             res.status(400).send({'msg':"Please Put right Credentials"})
